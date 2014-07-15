@@ -61,7 +61,7 @@ int main(int argc, char** argv) {
     {
     cout<<OceanRise<<"\t\t"<<(OceanRise*1.5)<<" mm"<<endl;
     OceanRise++; //Increment the counter.
-    }  
+    }
     
     cout<<"\nProblem Four: Calories Burned"<<endl;
     //Declare Variables
@@ -76,7 +76,7 @@ int main(int argc, char** argv) {
     {
     cout<<Minutes<<"\t\t"<<(Minutes*3.9)<<" calories"<<endl;
     Minutes+=5; //Increment the counter.
-    }  
+    }
 
     cout<<"\nProblem Five: Membership Fees Increase."<<endl;
     //Declare Variables
@@ -94,9 +94,28 @@ int main(int argc, char** argv) {
     cout<<Period<<"\t\t$"<<(MemFee*0.06)<<"\t\t$"<<(MemFee+(MemFee*0.06))<<endl;
     Period++; //Increment the counter.
     MemFee+=(MemFee*0.06);
-    }  
+    }
 
     cout<<"\nProblem Six: Distance Traveled."<<endl;
+    //Declare Variables
+    unsigned short FirstHour=1;//First hour traveling
+    unsigned short Speed, LastHour;//Speed and # of hours inputed by the user    
+    unsigned short Time=FirstHour;//Counter
+    
+    //Inputs
+    cout<<"How fast are you traveling in miles per hour?"<<endl;
+    cin>>Speed;
+    cout<<"How many hours are you travel?"<<endl;
+    cin>>LastHour;
+    
+    //Calculations and Output
+    cout << "Hour           Distance Traveled"<<endl;
+    cout << "--------------------------------"<<endl;
+    while (Time<=LastHour)
+    {
+    cout<<Time<<"\t\t"<<(Time*Speed)<<" miles"<<endl;
+    Time++; //Increment the counter.
+    }
     
     //Declare Variables
     
