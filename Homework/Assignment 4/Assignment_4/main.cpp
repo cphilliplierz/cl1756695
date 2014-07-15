@@ -17,8 +17,8 @@ using namespace std;
 
 //Execution
 int main(int argc, char** argv) {
-    cout<<"Hello!\nThis is Assignment 4."<<endl<<endl;
-    cout<<"Problem One: Sum of Numbers."<<endl;
+    cout<<"Hello!\nThis is Assignment 4."<<endl;
+    cout<<"\nProblem One: Sum of Numbers."<<endl;
     
     //Declare Variables
     unsigned int posint;//Positive integer input by user
@@ -36,19 +36,9 @@ int main(int argc, char** argv) {
     
     //Outputs
     cout<<"The sum of the positive integer you inputed and all the positive ";
-    cout<<"integers of lesser value to it is "<<sumint<<"."<<endl<<endl;
+    cout<<"integers of lesser value to it is "<<sumint<<"."<<endl;
     
-    cout<<"Problem Two: Characters for the ASCII Codes."<<endl;
-    
-    //Declare Variables
-    
-    //Inputs
-    
-    //Calculations
-    
-    //Outputs
-    
-    cout<<"Problem Three: Ocean Levels."<<endl;
+    cout<<"\nProblem Two: Characters for the ASCII Codes."<<endl;
     
     //Declare Variables
     
@@ -58,7 +48,55 @@ int main(int argc, char** argv) {
     
     //Outputs
     
-    cout<<"Problem Four: Calories Burned."<<endl;
+    cout<<"\nProblem Three: Ocean Levels."<<endl;
+    //Declare Variables
+    unsigned short FirstYear=1,//First year of Ocean Rise recorded
+    LastYear=25;//Last year of Ocean Rise recorded
+    unsigned short OceanRise=FirstYear;//Counter
+    
+    //Calculations and Output
+    cout<<"Years         Ocean Rise"<<endl;
+    cout<<"------------------------"<<endl;
+    while (OceanRise<=LastYear)
+    {
+    cout<<OceanRise<<"\t\t"<<(OceanRise*1.5)<<" mm"<<endl;
+    OceanRise++; //Increment the counter.
+    }  
+    
+    cout<<"\nProblem Four: Calories Burned"<<endl;
+    //Declare Variables
+    unsigned short FirstIncr=10,//First increment of time while exercising
+    LastIncr=30;//Last increment of time while exercising
+    unsigned short Minutes=FirstIncr;//Counter
+    
+    //Calculations and Output
+    cout << "Minutes        Calories Burned"<<endl;
+    cout << "------------------------------"<<endl;
+    while (Minutes<=LastIncr)
+    {
+    cout<<Minutes<<"\t\t"<<(Minutes*3.9)<<" calories"<<endl;
+    Minutes+=5; //Increment the counter.
+    }  
+
+    cout<<"\nProblem Five: Membership Fees Increase."<<endl;
+    //Declare Variables
+    unsigned short FirstRise=1,//First increment of time while exercising
+    LastRise=6,//Last increment of time while exercising
+    MemFee=2500,//Membership fee
+    FeeIncr;//Fee Increase
+    unsigned short Period=FirstRise;//Counter
+    
+    //Calculations and Output
+    cout << "Year          Fee Increase     New Annual Fee"<<endl;
+    cout << "---------------------------------------------"<<endl;
+    while (Period<=LastRise)
+    {
+    cout<<Period<<"\t\t$"<<(MemFee*0.06)<<"\t\t$"<<(MemFee+(MemFee*0.06))<<endl;
+    Period++; //Increment the counter.
+    MemFee+=(MemFee*0.06);
+    }  
+
+    cout<<"\nProblem Six: Distance Traveled."<<endl;
     
     //Declare Variables
     
@@ -68,7 +106,7 @@ int main(int argc, char** argv) {
     
     //Outputs
     
-    cout<<"Problem Five: Membership Fees Increase."<<endl;
+    cout<<"\nProblem Seven: Pennies for Pay."<<endl;
     
     //Declare Variables
     
@@ -78,7 +116,7 @@ int main(int argc, char** argv) {
     
     //Outputs
     
-    cout<<"Problem Six: Distance Traveled."<<endl;
+    cout<<"\nProblem Eight: Math Tutor."<<endl;
     
     //Declare Variables
     
@@ -88,7 +126,7 @@ int main(int argc, char** argv) {
     
     //Outputs
     
-    cout<<"Problem Seven: Pennies for Pay."<<endl;
+    cout<<"\nProblem Nine: Horel Occupancy."<<endl;
     
     //Declare Variables
     
@@ -98,27 +136,7 @@ int main(int argc, char** argv) {
     
     //Outputs
     
-    cout<<"Problem Eight: Math Tutor."<<endl;
-    
-    //Declare Variables
-    
-    //Inputs
-    
-    //Calculations
-    
-    //Outputs
-    
-    cout<<"Problem Nine: Horel Occupancy."<<endl;
-    
-    //Declare Variables
-    
-    //Inputs
-    
-    //Calculations
-    
-    //Outputs
-    
-    cout<<"Problem Ten: Average Rainfall."<<endl;
+    cout<<"\nProblem Ten: Average Rainfall."<<endl;
     
     //Declare Variables
     
