@@ -16,20 +16,24 @@ using namespace std;
 
 //Global Constants
 
-//Declare Global Variables
+//Global Variables
 unsigned short BarRice=10,CasWine=10,PitMilk=10,HeadCab=10;//Number of barrels of rice, casks of wine, pitchers of milk, and heads of cabbage
 unsigned int IronOre=0;//Total kilograms of iron ore in storehouse
 
 //Function Prototypes
-int mine(int,int,int,int,int);
-int marketplace(int,int,int,int,int);
-int ricemarket (int,int);
-int winemarket (int,int);
-int milkmarket (int,int);
-int cabbagemarket (int,int);
-int CostofIron (int);
+void mine(int,int,int,int,int);
+void marketplace(int,int,int,int,int);
+void ricemarket (int,int);
+void winemarket (int,int);
+void milkmarket (int,int);
+void cabbagemarket ();
 void storehouse(int,int,int,int,int);
 void homestead(int);
+void ChnginIron(int);
+void ChnginRice(int);
+void ChnginWine(int);
+void ChnginMilk(int);
+void ChnginCabb(int);
 
 //Execution
 int main(int argc, char** argv) {
@@ -54,17 +58,13 @@ int main(int argc, char** argv) {
         {
             case '1'://iron mine
             {
-                IronOre=mine(IronOre,BarRice,CasWine,PitMilk,HeadCab);
-                BarRice=0;
-                CasWine=0;
-                PitMilk=0;
-                HeadCab=0;
+                mine(IronOre,BarRice,CasWine,PitMilk,HeadCab);
                 break;
             }
         
             case '2'://marketplace
             {
-                IronOre,BarRice,CasWine,PitMilk,HeadCab=marketplace(IronOre,BarRice,CasWine,PitMilk,HeadCab);
+                marketplace(IronOre,BarRice,CasWine,PitMilk,HeadCab);
                 break;
             }
         
@@ -89,7 +89,7 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-int mine(int num1,int num2,int num3,int num4,int num5)
+void mine(int num1,int num2,int num3,int num4,int num5)
 {
     //Define local variables
     char confirm;//confirm yes or no
@@ -143,7 +143,18 @@ int mine(int num1,int num2,int num3,int num4,int num5)
                 num5--;
             }
         }
+        while (num5>0)
+        {
+            num1+=3;
+            num5--;
+        }
     }
+    
+    ChnginIron(num1);
+    ChnginRice(num2);
+    ChnginWine(num3);
+    ChnginMilk(num4);
+    ChnginCabb(num5);
     
     cout<<"You have "<<num1<<" kilograms of iron ore."<<endl<<endl;
     
@@ -182,13 +193,9 @@ int mine(int num1,int num2,int num3,int num4,int num5)
         if (unhealthy==true)
             cout<<"Your worker is unhealthy. Buy cabbage to improve productivity."<<endl<<endl;
     }
-    else
-        cout<<"Your productivity is good!"<<endl<<endl;
-    
-    return num1;
 }
 
-int marketplace (int num1,int num2,int num3,int num4,int num5)
+void marketplace (int num1,int num2,int num3,int num4,int num5)
 {
     //define local variables
     char choice;//local menu choice
@@ -206,25 +213,25 @@ int marketplace (int num1,int num2,int num3,int num4,int num5)
         {
             case '1':
             {
-                BarRice=ricemarket(num1,num2);
+                ricemarket(num1,num2);
                 break;
             }
         
             case '2':
             {
-                num1,num3=winemarket(num1,num3);
+                winemarket(num1,num3);
                 break;
             }
         
             case '3':
             {
-                num1,num4=milkmarket(num1,num4);
+                milkmarket(num1,num4);
                 break;
             }
 
             case '4':
             {
-                num1,num5=cabbagemarket(num1,num5);
+                cabbagemarket(num1,num5);
                 break;
             }
             default:
@@ -234,11 +241,9 @@ int marketplace (int num1,int num2,int num3,int num4,int num5)
         }
     }
     while(choice>='1'&&choice<='4');
-    
-    return num1,num2,num3,num4,num5;
 }
 
-int ricemarket(int num1,int num2)
+void ricemarket(int num1,int num2)
 {
     //Declare local variables
     unsigned short BuyRice;
@@ -254,21 +259,19 @@ int ricemarket(int num1,int num2)
     cout<<endl;
     if(num1>=(BuyRice*CostBar))
     {
-        num1-=(BuyRice*CostBar);
-        num2+=(BuyRice);
+        IronOre-=(BuyRice*CostBar);
+        BarRice+=(BuyRice);
     }
     
     else
         cout<<"You do not have enough Iron Ore to buy that much rice."<<endl<<endl;
-    
-    return num1,num2;
 }
 
-int winemarket(int num1,int num3)
+void winemarket(int num1,int num3)
 {
     //Declare local variables
     unsigned short BuyWine;
-    unsigned short CostCas=10;
+    unsigned short CostCas=5;
     
     //Display prices
     cout<<"The cost of a cask of wine is "<<CostCas<<" kg of iron ore"<<endl<<endl;
@@ -280,21 +283,19 @@ int winemarket(int num1,int num3)
     cout<<endl;
     if(num1>=(BuyWine*CostCas))
     {
-        num1-=(BuyWine*CostCas);
-        num3+=(BuyWine);
+        IronOre-=(BuyWine*CostCas);
+        CasWine+=(BuyWine);
     }
     
     else
         cout<<"You do not have enough Iron Ore to buy that much wine."<<endl<<endl;
-    
-    return num1,num3;
 }
 
-int milkmarket(int num1,int num4)
+void milkmarket(int num1,int num4)
 {
     //Declare local variables
     unsigned short BuyMilk;
-    unsigned short CostPit=10;
+    unsigned short CostPit=2;
     
     //Display prices
     cout<<"The cost of a pitcher of milk is "<<CostPit<<" kg of iron ore"<<endl<<endl;
@@ -306,46 +307,36 @@ int milkmarket(int num1,int num4)
     cout<<endl;
     if(num1>=(BuyMilk*CostPit))
     {
-        num1-=(BuyMilk*CostPit);
-        num4+=(BuyMilk);
+        IronOre-=(BuyMilk*CostPit);
+        PitMilk+=(BuyMilk);
     }
     
     else
         cout<<"You do not have enough Iron Ore to buy that much milk."<<endl<<endl;
-    
-    return num1,num4;
 }
 
-int cabbagemarket(int num1,int num5)
+void cabbagemarket()
 {
     //Declare local variables
     unsigned short BuyCabb;
-    unsigned short CostHead=10;
+    unsigned short CostHead=1;
     
     //Display prices
     cout<<"The cost of a head of cabbage is "<<CostHead<<" kg of iron ore"<<endl<<endl;
     
     //Buy food
     cout<<"How many heads of cabbage do you buy? Iron Ore ";
-    cout<<num1<<"kg"<<endl;
+    cout<<IronOre<<"kg"<<endl;
     cin>>BuyCabb;
     cout<<endl;
     if(num1>=(BuyCabb*CostHead))
     {
-        num1-=(BuyCabb*CostHead);
-        num5+=(BuyCabb);
-        CostofIron(num1);
+        IronOre-=(BuyCabb*CostHead);
+        HeadCab+=(BuyCabb);
     }
     
     else
     cout<<"You do not have enough Iron Ore to buy that much cabbage."<<endl<<endl;
-    
-    return num5;
-}
-
-void CostofIron (int num1)
-{
-    IronOre=num1;
 }
 
 void storehouse(int num1,int num2,int num3,int num4,int num5)
@@ -375,4 +366,28 @@ void homestead(int num1)
     }
 }
 
+void ChnginIron(int num1)
+{
+    IronOre=num1;
+}
+
+void ChnginRice(int num2)
+{
+    BarRice=num2;
+}
+
+void ChnginWine(int num3)
+{
+    CasWine=num3;
+}
+
+void ChnginMilk(int num4)
+{
+    PitMilk=num4;
+}
+
+void ChnginCabb(int num5)
+{
+    HeadCab=num5;
+}
 
