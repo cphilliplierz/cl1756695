@@ -16,209 +16,67 @@ using namespace std;
 
 //Global Constants
 
+//Declare Global Variables
+unsigned short BarRice=10,CasWine=10,PitMilk=10,HeadCab=10;//Number of barrels of rice, casks of wine, pitchers of milk, and heads of cabbage
+unsigned int IronOre=0;//Total kilograms of iron ore in storehouse
+
 //Function Prototypes
-void showMenu(int,int,int,int,int);
-void mine(int,int,int,int,int);
-void marketplace(int,int,int,int,int);
+int mine(int,int,int,int,int);
+int marketplace(int,int,int,int,int);
+int ricemarket (int,int);
+int winemarket (int,int);
+int milkmarket (int,int);
+int cabbagemarket (int,int);
+int CostofIron (int);
 void storehouse(int,int,int,int,int);
 void homestead(int);
 
 //Execution
 int main(int argc, char** argv) {
-    //Declare Variables
-    char           choice,//menu choice
-                   Confirm;//confirm Yes or No
-    bool           hungry=true,//character descriptions effect production
-                   unhappy=true,//character descriptions effect production
-                   weak=true,//character descriptions effect production
-                   unhealthy=true;//character descriptions effect production
-    unsigned short BarRice=10,//Number of barrels of rice.
-                   CasWine=10,//CosGood;//Number of casks of wine
-                   PitMilk=10,//Number of pitchers of milk
-                   HeadCab=10,//Number of heads of cabbage
-                   BuyRice,//Number of barrels of rice being bought
-                   BuyWine,//Number of casks of wine being bought
-                   BuyMilk,//Number of pitchers of milk being bought
-                   BuyCabb,//Number of heads of cabbage being bought
-                   CostBar=10,//Staring cost for a barrel of rice in kg of iron ore
-                   CostCas=5,//Starting cost for a cask of wine in kg of iron ore
-                   CostPit=2,//Starting cost for a pitcher of milk in kg of iron ore
-                   CostHead=1,//Starting cost for a head of cabbage in kg of iron ore
-                   nDays;//Number of day working in the mine.
-    unsigned int   IronOre=0;//Total kilograms of iron ore in storehouse
-
-    cout<<"You are the Master of Irontown, but the iron will not last forever."<<endl;
-    cout<<"Keep your people healthy and happy, and make Irontown sustainable to win the game."<<endl<<endl;
-    
-    showMenu(IronOre,BarRice,CasWine,PitMilk,HeadCab);//Go to Game Menu
-
-    do{
-        //Output the menu and input the choice
-        
-        //Different areas the player can go is set up as a switch statement. 
-        cout<<endl;
-        switch(choice){
-            case '1':{//iron mine
-                cout<<"Would you like to work in the mine? Y N"<<endl;
-                cin>>Confirm;
-                if (Confirm=='Y'||Confirm=='y'){
-                while (BarRice>0){
-                    IronOre+=12;
-                    BarRice--;
-                    while (CasWine>0){
-                        IronOre+=8;
-                        CasWine--;
-                        while (PitMilk>0){
-                            IronOre+=5;
-                            PitMilk--;
-                        }while (HeadCab>0){
-                            IronOre+=3;
-                            HeadCab--;
-                        }
-                    }while (PitMilk>0){
-                        IronOre+=5;
-                        PitMilk--;
-                        while (HeadCab>0){
-                            IronOre+=3;
-                            HeadCab--;
-                        }
-                    }while (HeadCab>0){
-                        IronOre+=3;
-                        HeadCab--;
-                    }
-                }while (CasWine>0){
-                    IronOre+=8;
-                    CasWine--;
-                    while (PitMilk>0){
-                        IronOre+=5;
-                        PitMilk--;
-                        while (HeadCab>0){
-                            IronOre+=3;
-                            HeadCab--;
-                        }
-                    }while (HeadCab>0){
-                        IronOre+=3;
-                        HeadCab--;
-                    }
-                }while (PitMilk>0){
-                    IronOre+=5;
-                    PitMilk--;
-                    while (HeadCab>0){
-                        IronOre+=3;
-                        HeadCab--;
-                    }
-                }while (HeadCab>0){
-                    IronOre+=3;
-                    HeadCab--;
-                }cout<<"You have "<<IronOre<<" KG of Iron Ore."<<endl<<endl;
-                if (BarRice==0){
-                    hungry=true;
-                }else{
-                    hungry=false;
-                }if (CasWine==0){
-                    unhappy=true;
-                }else{
-                    unhappy=false;
-                }if (PitMilk==0){
-                    weak=true;
-                }else{
-                    weak=false;
-                }if (HeadCab==0){
-                    unhealthy=true;
-                }else{
-                    unhealthy=false;
-                }if(hungry==true){
-                    cout<<"Your workers are hungry. Buy rice to improve productivity."<<endl<<endl;
-                    if (unhappy==true){
-                        cout<<"Your workers are unhappy. Buy wine to improve productivity."<<endl<<endl;
-                            if (weak==true){
-                                cout<<"Your workers are weak. Buy milk to improve productivity."<<endl<<endl;
-                                if (unhealthy==true){
-                                    cout<<"Your workers are unhealthy. Buy cabbage to improve productivity."<<endl<<endl;
-                                }else{
-                                    break;
-                                }
-                            }else if (unhealthy==true){
-                                cout<<"Your worker is unhealthy. Buy cabbage to improve productivity."<<endl<<endl;
-                            }else {
-                                break;
-                            }
-                    }else if (weak==true){
-                        cout<<"Your worker is weak. Buy milk to improve productivity."<<endl<<endl;
-                    }else if (unhealthy==true){
-                        cout<<"Your worker is unhealthy. Buy cabbage to improve productivity."<<endl<<endl;
-                    }else {
-                        break;
-                }
-                }else if (unhappy==true){
-                    cout<<"Your worker is unhappy. Buy wine to improve productivity."<<endl<<endl;
-                    if (weak==true){
-                        cout<<"Your worker is weak. Buy milk to improve productivity."<<endl<<endl;
-                    }else if (unhealthy==true){
-                        cout<<"Your worker is unhealthy. Buy cabbage to improve productivity."<<endl<<endl;
-                    }else {
-                        cout<<"Your productivity is good!"<<endl<<endl;
-                    }
-                }else if (weak==true){
-                    cout<<"Your worker is weak. Buy milk to improve productivity."<<endl<<endl;
-                    if (unhealthy==true){
-                        cout<<"Your worker is unhealthy. Buy cabbage to improve productivity."<<endl<<endl;
-                    }else {
-                        cout<<"Your productivity is good!"<<endl<<endl;
-                    }
-                }else if (unhealthy==true){
-                    cout<<"Your worker is unhealthy. Buy cabbage to improve productivity."<<endl<<endl;
-                    cout<<"Your productivity is good!"<<endl<<endl;
-                }else {
-                    cout<<"Your productivity is great!!!"<<endl<<endl;
-                }
-                }else {
-                    break;
-                }
-                break;
-
-    return 0;
-}
-
-void showMenu(int num1,int num2,int num3,int num4,int num5)
-{
     //Declare Local Variables
     char choice;//menu choice
     
-    //Display menu and ask of input
+    cout<<"You are the Master of Irontown, but the iron will not last forever."<<endl;
+    cout<<"Keep your people healthy and happy, and make Irontown sustainable to win the game."<<endl<<endl;
+    
+    //Display menu and ask for input
     do
     {
-    cout<<"Game Menu"<<endl;
-    cout<<"Type 1 to work in the mine."<<endl;//Basis game mechanic where players mine iron ore so they can buy goods. Can be risky.
-    cout<<"Type 2 to go to the marketplace."<<endl;//Place where players can buy more goods.
-    cout<<"Type 3 to inspect the storehouse."<<endl;//Place where players can inspect the goods they already have.
-    cout<<"Type 4 to go to the homestead."<<endl;//Place where players can buy a ricefield to end the game
-    cout<<"Type 5 to leave the game world."<<endl;//
-    cin>>choice;
+        cout<<"Game Menu"<<endl;
+        cout<<"Type 1 to work in the mine."<<endl;//Basis game mechanic where players mine iron ore so they can buy goods. Can be risky.
+        cout<<"Type 2 to go to the marketplace."<<endl;//Place where players can buy more goods.
+        cout<<"Type 3 to inspect the storehouse."<<endl;//Place where players can inspect the goods they already have.
+        cout<<"Type 4 to go to the homestead."<<endl;//Place where players can buy a ricefield to end the game
+        cout<<"Type 5 to leave the game world."<<endl;//
+        cin>>choice;
 
         switch(choice)
         {
             case '1'://iron mine
             {
-                mine(num1,num2,num3,num4,num5);
+                IronOre=mine(IronOre,BarRice,CasWine,PitMilk,HeadCab);
+                BarRice=0;
+                CasWine=0;
+                PitMilk=0;
+                HeadCab=0;
                 break;
             }
         
             case '2'://marketplace
             {
-                marketplace(num1,num2,num3,num4,num5);
+                IronOre,BarRice,CasWine,PitMilk,HeadCab=marketplace(IronOre,BarRice,CasWine,PitMilk,HeadCab);
                 break;
             }
         
             case '3'://storehouse
             {
-                storehouse(num1,num2,num3,num4,num5);
+                storehouse(IronOre,BarRice,CasWine,PitMilk,HeadCab);
                 break;
             }
 
             case '4'://homestead
             {
-                homestead(num1);
+                homestead(IronOre);
                 break;
             }
             default:
@@ -228,34 +86,166 @@ void showMenu(int num1,int num2,int num3,int num4,int num5)
         }
     }
     while(choice>='1'&&choice<='4');
+    return 0;
 }
 
-void mine(int num1,int num2,int num3,int num4,int num5)
+int mine(int num1,int num2,int num3,int num4,int num5)
 {
+    //Define local variables
+    char confirm;//confirm yes or no
+    bool hungry,unhappy,weak,unhealthy;//worker descriptions that effect production 
+    cout<<"Would you like to work in the mine? Y N"<<endl;
+    cin>>confirm;
+    if (confirm=='Y'||confirm=='y')
+    {
+        while (num2>0)
+        {
+            num1+=12;
+            num2--;
+            while (num3>0)
+            {
+                num1+=8;
+                num3--;
+                while (num4>0)
+                {
+                    num1+=5;
+                    num4--;
+                    while (num5>0)
+                    {
+                        num1+=3;
+                        num5--;
+                    }
+                }
+            }
+        }
+        while (num3>0)
+        {
+            num1+=8;
+            num3--;
+            while (num4>0)
+            {
+                num1+=5;
+                num4--;
+                while (num5>0)
+                {
+                    num1+=3;
+                    num5--;
+                }
+            }
+        }
+        while (num4>0)
+        {
+            num1+=5;
+            num4--;
+            while (num5>0)
+            {
+                num1+=3;
+                num5--;
+            }
+        }
+    }
     
+    cout<<"You have "<<num1<<" kilograms of iron ore."<<endl<<endl;
+    
+    hungry=(num2==0);
+    unhappy=(num3==0);
+    weak=(num4==0);
+    unhealthy=(num5==0);
+                
+    if(hungry==true)
+    {
+        cout<<"Your workers are hungry. Buy rice to improve productivity."<<endl<<endl;
+        if (unhappy==true)
+        {
+            cout<<"Your workers are unhappy. Buy wine to improve productivity."<<endl<<endl;
+            if (weak==true)
+            {
+                cout<<"Your workers are weak. Buy milk to improve productivity."<<endl<<endl;
+                if (unhealthy==true)
+                    cout<<"Your workers are unhealthy. Buy cabbage to improve productivity."<<endl<<endl;
+            }
+        }
+    }
+    else if (unhealthy==true)
+    {
+        cout<<"Your workers are unhealthy. Buy cabbage to improve productivity."<<endl<<endl;
+        if (weak==true)
+        {
+            cout<<"Your workers is weak. Buy milk to improve productivity."<<endl<<endl;
+            if (unhealthy==true)
+                cout<<"Your worker is unhealthy. Buy cabbage to improve productivity."<<endl<<endl;
+        }
+    }
+    else if (weak==true)
+    {
+        cout<<"Your worker is weak. Buy milk to improve productivity."<<endl<<endl;
+        if (unhealthy==true)
+            cout<<"Your worker is unhealthy. Buy cabbage to improve productivity."<<endl<<endl;
+    }
+    else
+        cout<<"Your productivity is good!"<<endl<<endl;
+    
+    return num1;
 }
 
-void marketplace(int num1,int num2,int num3,int num4,int num5)
+int marketplace (int num1,int num2,int num3,int num4,int num5)
 {
-    //Define Local Variables
-    unsigned short CostBar=10,
-                   CostCas=5,
-                   CostPit=2,
-                   CostHead=1,
-                   BuyRice,//Number of barrels of rice being bought
-                   BuyWine,//Number of casks of wine being bought
-                   BuyMilk,//Number of pitchers of milk being bought
-                   BuyCabb;//Number of heads of cabbage being bought
+    //define local variables
+    char choice;//local menu choice
+    do
+    {
+        cout<<"Game Menu"<<endl;
+        cout<<"Type 1 to buy rice."<<endl;//goes to rice buying function
+        cout<<"Type 2 to buy wine."<<endl;//goes to wine buying function
+        cout<<"Type 3 to buy milk."<<endl;//goes to milk buying function
+        cout<<"Type 4 to buy cabbage."<<endl;//goes to cabbage buying function
+        cout<<"Type 5 to leave the marketplace."<<endl;//leaves the marketplace
+        cin>>choice;
+
+        switch(choice)
+        {
+            case '1':
+            {
+                BarRice=ricemarket(num1,num2);
+                break;
+            }
+        
+            case '2':
+            {
+                num1,num3=winemarket(num1,num3);
+                break;
+            }
+        
+            case '3':
+            {
+                num1,num4=milkmarket(num1,num4);
+                break;
+            }
+
+            case '4':
+            {
+                num1,num5=cabbagemarket(num1,num5);
+                break;
+            }
+            default:
+            {
+                cout<<"Thank you for shopping in the marketplace!"<<endl<<endl;
+            }
+        }
+    }
+    while(choice>='1'&&choice<='4');
+    
+    return num1,num2,num3,num4,num5;
+}
+
+int ricemarket(int num1,int num2)
+{
+    //Declare local variables
+    unsigned short BuyRice;
+    unsigned short CostBar=10;
     
     //Display prices
-    cout<<"The cost of a barrel of rice is "<<CostBar<<" kg of ";
-    cout<<"iron ore"<<endl;
-    cout<<"The cost of a cask of wine is "<<CostCas<<" kg of ";
-    cout<<"iron ore"<<endl;
-    cout<<"The cost of a pitcher of milk is "<<CostPit<<" kg of ";
-    cout<<"iron ore"<<endl;
-    cout<<"The cost of a head of cabbage is "<<CostHead<<" kg of ";
-    cout<<"iron ore"<<endl<<endl;
+    cout<<"The cost of a barrel of rice is "<<CostBar<<" kg of iron ore."<<endl<<endl;
     
     //Buy food
     cout<<"How many barrels of rice do you buy? Iron Ore ";
@@ -270,7 +260,20 @@ void marketplace(int num1,int num2,int num3,int num4,int num5)
     
     else
         cout<<"You do not have enough Iron Ore to buy that much rice."<<endl<<endl;
-                    
+    
+    return num1,num2;
+}
+
+int winemarket(int num1,int num3)
+{
+    //Declare local variables
+    unsigned short BuyWine;
+    unsigned short CostCas=10;
+    
+    //Display prices
+    cout<<"The cost of a cask of wine is "<<CostCas<<" kg of iron ore"<<endl<<endl;
+    
+    //Buy food
     cout<<"How many casks of wine do you buy? Iron Ore ";
     cout<<num1<<"kg"<<endl;
     cin>>BuyWine;
@@ -283,7 +286,20 @@ void marketplace(int num1,int num2,int num3,int num4,int num5)
     
     else
         cout<<"You do not have enough Iron Ore to buy that much wine."<<endl<<endl;
-                    
+    
+    return num1,num3;
+}
+
+int milkmarket(int num1,int num4)
+{
+    //Declare local variables
+    unsigned short BuyMilk;
+    unsigned short CostPit=10;
+    
+    //Display prices
+    cout<<"The cost of a pitcher of milk is "<<CostPit<<" kg of iron ore"<<endl<<endl;
+    
+    //Buy food
     cout<<"How many pitchers of milk do you buy? Iron Ore ";
     cout<<num1<<"kg"<<endl;
     cin>>BuyMilk;
@@ -296,7 +312,20 @@ void marketplace(int num1,int num2,int num3,int num4,int num5)
     
     else
         cout<<"You do not have enough Iron Ore to buy that much milk."<<endl<<endl;
-                   
+    
+    return num1,num4;
+}
+
+int cabbagemarket(int num1,int num5)
+{
+    //Declare local variables
+    unsigned short BuyCabb;
+    unsigned short CostHead=10;
+    
+    //Display prices
+    cout<<"The cost of a head of cabbage is "<<CostHead<<" kg of iron ore"<<endl<<endl;
+    
+    //Buy food
     cout<<"How many heads of cabbage do you buy? Iron Ore ";
     cout<<num1<<"kg"<<endl;
     cin>>BuyCabb;
@@ -305,12 +334,18 @@ void marketplace(int num1,int num2,int num3,int num4,int num5)
     {
         num1-=(BuyCabb*CostHead);
         num5+=(BuyCabb);
+        CostofIron(num1);
     }
     
     else
-    cout<<"You do not have enough Iron Ore to buy that much cabbage."<<endl<<endl;    
+    cout<<"You do not have enough Iron Ore to buy that much cabbage."<<endl<<endl;
     
-    cout<<"You have "<<num1<<"kg of Iron Ore remaining in your storehouse."<<endl<<endl;
+    return num5;
+}
+
+void CostofIron (int num1)
+{
+    IronOre=num1;
 }
 
 void storehouse(int num1,int num2,int num3,int num4,int num5)
@@ -339,4 +374,5 @@ void homestead(int num1)
             cout<<"Congratulations. You have made Irontown sustainable."<<endl<<endl;
     }
 }
+
 
